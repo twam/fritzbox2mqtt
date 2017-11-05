@@ -1,0 +1,47 @@
+mqtt:
+  address: localhost
+  port: 1883
+#  username: username
+#  password: topsecret
+  prefix: 
+    fritzbox
+
+fritzbox:
+  address: fritz.box
+  defaultPeriod: 5
+#  port: 8086
+#  username: username
+#  password: topsecret
+
+  services:
+    WANCommonInterfaceConfig:
+      prefix: wan
+      actions:
+        GetTotalBytesSent:
+          values:
+            NewTotalBytesSent:
+              topic: totalBytesSent
+              type: int
+        GetTotalBytesReceived:
+          values:
+            NewTotalBytesReceived:
+              topic: totalBytesReceived
+              type: int
+    WLANConfiguration:[1-2,3]:
+      prefix: wifi{id}
+      actions:
+        GetTotalAssociations:
+          period: 30
+          values:
+            NewTotalAssociations:
+              topic: totalAssociations
+              type: int
+        GetInfo:
+          period: 60
+          values:
+            NewSSID:
+              topic: ssid
+              type: str
+            NewChannel:
+              topic: channel
+              type: int
