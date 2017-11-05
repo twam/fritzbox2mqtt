@@ -9,7 +9,7 @@ mqtt:
 fritzbox:
   address: fritz.box
   defaultPeriod: 5
-#  port: 8086
+#  port: 49000
 #  username: username
 #  password: topsecret
 
