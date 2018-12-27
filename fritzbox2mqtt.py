@@ -56,6 +56,7 @@ def processFritzboxMessages(mqtt, fritzbox, stopEvent):
         try:
             msg = fritzbox.getQueue().get()
             if msg is None:
+                fritzbox.getQueue().task_done()
                 continue
 
             logging.debug("Fritzbox message: topic=%s value=%r" % (msg['topic'], msg['value']))
@@ -109,8 +110,8 @@ def run(args):
 
         stopEvent.set()
 
-        t.join()
         f.disconnect()
+        t.join()
         m.disconnect()
 
         logging.shutdown()
