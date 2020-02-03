@@ -46,7 +46,7 @@ def parseArgs(argv):
 
 def parseConfig(filename):
     try:
-        return yaml.load(open(filename, "r"))
+        return yaml.load(open(filename, "r"), Loader=yaml.FullLoader)
     except Exception as e:
         raise
         logging.error("Can't load yaml file %r (%r)" % (filename, e))
