@@ -10,12 +10,55 @@ fritzbox:
   address: fritz.box
   defaultPeriod: 5
 #  port: 49000
-#  username: username
+#  username: username (Create New User -> fritz.box -> System -> FRITZ!Box-Benutzer)
 #  password: topsecret
 
   services:
+    DeviceInfo:
+      prefix: deviceInfo
+      actions:
+        GetInfo:
+          period: 3600
+          values:
+            NewDeviceLog:
+              topic: DeviceLog
+              type: str
+            NewManufacturerName:
+              topic: ManufacturerName
+              type: str
+            NewManufacturerOUI:
+              topic: ManufacturerOUI
+              type: str
+            NewModelName:
+              topic: ModelName
+              type: str
+            NewDescription:
+              topic: Description
+              type: str
+            NewProductClass:
+              topic: ProductClass
+              type: str
+            NewSerialNumber:
+              topic: SerialNumber
+              type: str
+            NewSoftwareVersion:
+              topic: SoftwareVersion
+              type: str
+            NewHardwareVersion:
+              topic: HardwareVersion
+              type: str
+            NewSpecVersion:
+              topic: SprecVersion
+              type: str
+            NewProvisioningCode:
+              topic: ProvisioningCode
+              type: str
+            NewUpTime:
+              topic: Uptime
+              type: str
     WANCommonInterfaceConfig:
       prefix: wan
+      period: 60
       actions:
         GetTotalBytesSent:
           values:
@@ -31,17 +74,83 @@ fritzbox:
       prefix: wifi{id}
       actions:
         GetTotalAssociations:
-          period: 30
+          period: 300
           values:
             NewTotalAssociations:
               topic: totalAssociations
               type: int
-        GetInfo:
-          period: 60
+        GetSecurityKeys:
+          period: 600
           values:
-            NewSSID:
-              topic: ssid
+            NewWEPKey0:
+              topic: WEPKey0
+              type: str
+            NewWEPKey1:
+              topic: WEPKey1
+              type: str
+            NewWEPKey2:
+              topic: WEPKey2
+              type: str
+            NewWEPKey3:
+              topic: WEPKey3
+              type: str
+            NewPreSharedKey:
+              topic: preSharedKey
+              type: str
+            NewKeyPassphrase:
+              topic: passphrase
+              type: str
+        GetInfo:
+          period: 600
+          values:
+            NewEnable:
+              topic: enable
+              type: int
+            NewStatus:
+              topic: status
+              type: str
+            NewMaxBitRate:
+              topic: maxBitRate
               type: str
             NewChannel:
               topic: channel
+              type: str
+            NewSSID:
+              topic: ssid
+              type: str
+            NewBeaconType:
+              topic: beaconType
+              type: str
+            NewMACAddressControlEnabled:
+              topic: MACAddressControlEnabled
               type: int
+            NewStandard:
+              topic: standard
+              type: str
+            NewBSSID:
+              topic: bssid
+              type: str
+            NewBasicEncryptionModes:
+              topic: encryptionMode
+              type: str
+            NewBasicAuthenticationMode:
+              topic: authenticationMode
+              type: str
+            NewMaxCharsSSID:
+              topic: MaxCharsSSID
+              type: int
+            NewMinCharsSSID:
+              topic: MinCharsSSID
+              type: int
+            NewAllowedCharsSSID:
+              topic: AllowedCharsSSID
+              type: str
+            NewMaxCharsPSK:
+              topic: MaxCharsPSK
+              type: int
+            NewMinCharsPSK:
+              topic: MinCharsPSK
+              type: int
+            NewAllowedCharsPSK:
+              topic: AllowedCharsPSK
+              type: str
