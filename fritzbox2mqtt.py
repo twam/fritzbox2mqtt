@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import logging
 import sys
@@ -46,7 +46,8 @@ def parseArgs(argv):
 
 def parseConfig(filename):
     try:
-        return yaml.load(open(filename, "r"), Loader=yaml.FullLoader)
+        with open(filename) as f:
+            return yaml.safe_load(f)
     except Exception as e:
         raise
         logging.error("Can't load yaml file %r (%r)" % (filename, e))
