@@ -1,6 +1,7 @@
 mqtt:
   address: localhost
   port: 1883
+#  ssl: 1
 #  username: username
 #  password: topsecret
   prefix: 

@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import logging
 import threading
 import queue
+import ssl
 
 class Mqtt:
     username = ""
@@ -28,6 +29,7 @@ class Mqtt:
         self.password = mqttConfig.get("password", "")
         self.address = mqttConfig.get("address", "localhost")
         self.port = mqttConfig.get("port", 1883)
+        self.ssl = mqttConfig.get("ssl", 0)
         self._queue = queue.Queue()
         self.prefix = mqttConfig.get("prefix")
 
@@ -48,6 +50,8 @@ class Mqtt:
         self._client.on_connect = self._mqtt_on_connect
         self._client.on_disconnect = self._mqtt_on_disconnect
         self._client.on_log = self._mqtt_on_log
+        if self.ssl:
+            self._client.tls_set_context(context=ssl.create_default_context())
         self._client.connect(self.address, self.port, 60)
 
         mqttLoopThread = threading.Thread(target=self._mqttLoop, name="mqttLoop")
