@@ -8,8 +8,8 @@ import argparse
 import yaml
 import threading
 
-import mqtt
-import fritzbox
+from . import mqtt
+from . import fritzbox
 
 def main(argv=None):
     if argv is None:
